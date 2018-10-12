@@ -9,17 +9,17 @@ void print_list(struct node * node) {
         printf("[]\n");
     } else {
         if(temp -> next == NULL) {
-            printf("[%d] -> [NULL]\n", temp -> i);
+            printf("[%s, %s] -> [NULL]\n", temp -> artist, temp -> name);
             return;
         } else {
-            printf("[%d] -> ", temp -> i);
+            printf("[%s, %s] -> ", temp -> artist, temp -> name);
             return(print_list(temp -> next));
         }
     }
 }
 
 // creates and returns a pointer with a value of the input
-struct node * create(int i) {
+struct node * create(char i) {
     struct node * temp;
     temp = malloc(sizeof(struct node));
     temp -> i = i;
