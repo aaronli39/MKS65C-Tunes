@@ -41,23 +41,24 @@ struct song_node * insert_front(struct song_node * node, char * a, char * n) {
     }
 }
 
-struct song_node * insert_artist(struct song_node * node, char * a, char * n) {
+struct song_node * insert_order(struct song_node * node, char * a, char * n) {
     struct song_node * temp = node;
 	// right now, this only tests for the first letter
 	// will need to write a new function to check the entire word
-	if (a[0] > temp->artist[0]) {
+  if (strcmp(a, temp -> artist) <= 0) {
 		return insert_name(node, a, n);
 	}
 	else {
-		return insert_artist(node -> next, a, n);
+		return insert_order(node -> next, a, n);
 	}
 }
 
+//helper func for insert_order
 struct song_node * insert_name(struct song_node * node, char * a, char * n) {
-    struct song_node * temp = node;
+  struct song_node * temp = node;
 	// right now, this only tests for the first letter
 	// will need to write a new function to check the entire word
-	if (n[0] > temp->name[0]) {
+	if (strcmp(n, temp->name) <= 0) {
 		return insert_front(node, a, n);
 	}
 	else {
