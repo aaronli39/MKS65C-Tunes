@@ -12,4 +12,12 @@ struct song_node * insert_order(struct song_node *, char *, char *);
 
 struct song_node * insert_name(struct song_node *, char *, char *);
 
+struct song_node * find_song(struct song_node *, struct song_node *);
+
+struct song_node * find_artist(struct song_node *, char *);
+
+struct song_node * random(struct song_node *);
+
+struct song_node * remove(struct song_node *, struct song_node *);
+
 struct song_node * free_list(struct song_node *);
