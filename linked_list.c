@@ -46,7 +46,7 @@ struct song_node * insert_artist(struct song_node * node, char * a, char * n) {
 	// right now, this only tests for the first letter
 	// will need to write a new function to check the entire word
 	if (a[0] > temp->artist[0]) {
-		return insert_front(node, a, n);
+		return insert_name(node, a, n);
 	}
 	else {
 		return insert_artist(node -> next, a, n);
@@ -61,7 +61,7 @@ struct song_node * insert_name(struct song_node * node, char * a, char * n) {
 		return insert_front(node, a, n);
 	}
 	else {
-		return insert_artist(node -> next, a, n);
+		return insert_name(node -> next, a, n);
 	}
 }
 
