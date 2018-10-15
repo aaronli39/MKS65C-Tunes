@@ -75,3 +75,19 @@ struct song_node * free_list(struct song_node * node) {
     free(node);
   }
 }
+
+//test
+int main() {
+  struct song_node * x;
+  strcpy(x->name, "abc");
+  strcpy(x->artist, "camilla");
+  x->next = NULL;
+
+  x = insert_order(x, "camilla", "abd");
+
+  print_list(x);
+
+  return 0;
+
+
+}
