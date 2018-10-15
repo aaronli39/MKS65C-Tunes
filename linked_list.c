@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "linked_list.h"
 
 // prints the linked list of the specified node element
-void print_list(struct node * node) {
-    struct node * temp = node;
+void print_list(struct song_node * node) {
+    struct song_node * temp = node;
     if(! temp) {
         printf("[]\n");
     } else {
@@ -19,28 +20,37 @@ void print_list(struct node * node) {
 }
 
 // creates and returns a pointer with a value of the input
-struct node * create(char i) {
-    struct node * temp;
-    temp = malloc(sizeof(struct node));
-    temp -> i = i;
+struct song_node * create(char * a, char * n) {
+    struct song_node * temp;
+    temp = malloc(sizeof(struct song_node));
+    strcpy(temp -> artist, a);
+    strcpy(temp -> name, n);
     temp -> next = NULL;
     return temp;
 }
 
 // insert to the front of input node a new node with value x.
 // return the new linked list
-struct node * insert_front(struct node * node, int x) {
-    struct node * temp = node;
+struct song_node * insert_front(struct song_node * node, char * a, char * n) {
+    struct song_node * temp = node;
     if(temp -> next == NULL) {
-        temp -> next = create(x);
+        temp -> next = create(a, n);
         return temp;
     } else {
-        return(insert_front(temp -> next, x));
+        return(insert_front(temp -> next, a, n));
     }
 }
 
+struct song_node * insert_artist(struct song_node * node, char * a, char * n) {
+    struct song_node * temp = node;
+}
+
+struct song_node * insert_name(struct song_node * node, char * a, char * n) {
+    struct song_node * temp = node;
+}
+
 // free the linked list of the given node
-struct node * free_list(struct node * node) {
+struct song_node * free_list(struct song_node * node) {
     if (node -> next == NULL) {
         free(node);
     } else {
