@@ -54,39 +54,39 @@ struct song_node * insert_front(struct song_node * node, char * a, char * n) {
 
 struct song_node * insert_order(struct song_node * node, char * a, char * n) {
     struct song_node * temp = node;
-    // right now, this only tests for the first letter
-    // will need to write a new function to check the entire word
-    if (strcmp(a, temp -> artist) <= 0) {
-        return insert_name(node, a, n);
+    struct song_node * new = create(a, n);
+    if (temp == NULL) {
+        return new;
     }
-    else {
-        return insert_order(node -> next, a, n);
-    }
-}
 
-//helper func for insert_order
-struct song_node * insert_name(struct song_node * node, char * a, char * n) {
-    struct song_node * temp = node;
-    // right now, this only tests for the first letter
-    // will need to write a new function to check the entire word
-    if (strcmp(n, temp->name) <= 0) {
-        return insert_front(node, a, n);
+    // error may occur here
+    if (compare(temp, new) > 0) {
+        new -> next = temp;
+        return new;
+    } //
+
+    while (compare(temp -> next, new) < 0 && temp -> next != NULL) {
+        temp = temp -> next;
     }
-    else {
-        return insert_name(node -> next, a, n);
-    }
+    // insert new node to the iterating node's next node since that
+    // was how the while loop exited, and where compare == 0
+    new -> next = temp -> next;
+    temp -> next = new; // connect both sides of the node
+    return node; // returns the original head node
 }
 
 struct song_node * find_song(struct song_node * head, struct song_node * target) {
     struct song_node * temp = head;
     int comp = compare(temp, head);
-    if (temp -> next == NULL || comp > 0) {
+    if (comp == 0) {
+        return temp -> artist;
+    } else if (temp -> next == NULL || comp > 0) {
         return NULL;
     } else {
-        
+        return find_song(temp -> next, target);
     }
-
 }
+
 // free the linked list of the given node
 struct song_node * free_list(struct song_node * node) {
     if (node -> next == NULL) {
