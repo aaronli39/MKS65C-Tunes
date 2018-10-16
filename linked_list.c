@@ -33,15 +33,9 @@ struct song_node * create(char * artist, char * name) {
 
 // compares two songs alphabetically first by artist then by name
 int compare(struct song_node * s1, struct song_node * s2) {
-    if (strcmp(s1 -> artist, s2 -> artist) < 0) {
-        return -1;
-    } else if (strcmp(s1 -> artist, s2 -> artist) > 0) {
-        return 1;
-    } else if (strcmp(s1 -> name, s2 -> name) < 0) {
-        return -1;
-    } else if (strcmp(s1 -> name, s2 -> name) > 0) {
-        return 1;
-    } return 0;
+    if (strcmp(s1 -> artist, s2 -> artist) != 0) {
+        return strcmp(s1 -> artist, s2 -> artist);
+    } return strcmp(s1 -> name, s2 -> name);
 }
 
 // insert to the front of input node a new node with value x.
@@ -84,6 +78,18 @@ struct song_node * find_song(struct song_node * head, struct song_node * target)
         return NULL;
     } else {
         return find_song(temp -> next, target);
+    }
+}
+
+struct song_node * find_artist(struct song_node * song, char * artist) {
+    struct song_node * temp = song;
+    int comp = compare(song -> artist, artist);
+    if (comp == 0) {
+        return temp;
+    } else if (temp -> next == NULL || comp > 0) {
+        return NULL;
+    } else {
+        return find_artist(temp -> next, artist);
     }
 }
 
