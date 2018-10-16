@@ -54,25 +54,9 @@ struct song_node * insert_front(struct song_node * node, char * a, char * n) {
 
 struct song_node * insert_order(struct song_node * node, char * a, char * n) {
     struct song_node * temp = node;
-<<<<<<< HEAD
     struct song_node * new = create(a, n);
     if (temp == NULL) {
         return new;
-=======
-    // right now, this only tests for the first letter
-    // will need to write a new function to check the entire word
-    struct song_node * new;
-    strcpy(new->artist, a);
-    strcpy(new->name, n);
-    new->next = NULL;
-
-    while (compare(temp, new) < 0) {
-      temp->next
-    }
-
-    if (strcmp(a, temp -> artist) <= 0) {
-        return insert_name(node, a, n);
->>>>>>> 0e6b9678de843b23d501dc644157eddff149a627
     }
 
     // error may occur here
@@ -99,11 +83,7 @@ struct song_node * find_song(struct song_node * head, struct song_node * target)
     } else if (temp -> next == NULL || comp > 0) {
         return NULL;
     } else {
-<<<<<<< HEAD
         return find_song(temp -> next, target);
-=======
-
->>>>>>> 0e6b9678de843b23d501dc644157eddff149a627
     }
 }
 
