@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "linked_list.h"
 
-
+//srand(time(NULL));
 
 // prints the linked list of the specified node element
 void print_list(struct song_node * node) {
@@ -69,21 +70,34 @@ struct song_node * insert_order(struct song_node * node, char * a, char * n) {
     return node; // returns the original head node
 }
 
-struct song_node * find_song(struct song_node * head, struct song_node * target) {
-    struct song_node * temp = head;
-    int comp = compare(temp, head);
+// struct song_node * find_song(struct song_node * head, struct song_node * target) {
+    // struct song_node * temp = head;
+    // int comp = compare(temp, head);
+    // if (comp == 0) {
+        // return temp -> artist;
+    // } else if (temp -> next == NULL || comp > 0) {
+        // return NULL;
+    // } else {
+        // return find_song(temp -> next, target);
+    // }
+// }
+
+struct song_node * find_song(struct song_node * song, char * artist, char * name) {
+    struct song_node * temp = find_artist(song, artist);
+    int comp = strcmp(song -> name, name);
+	int comp2 = strcmp(song -> artist, artist);
     if (comp == 0) {
-        return temp -> artist;
-    } else if (temp -> next == NULL || comp > 0) {
+        return temp;
+    } else if (temp -> next == NULL || comp > 0 || comp2 > 0) {
         return NULL;
     } else {
-        return find_song(temp -> next, target);
+        return find_song(temp -> next, artist, name);
     }
 }
 
 struct song_node * find_artist(struct song_node * song, char * artist) {
     struct song_node * temp = song;
-    int comp = compare(song -> artist, artist);
+    int comp = strcmp(song -> artist, artist);
     if (comp == 0) {
         return temp;
     } else if (temp -> next == NULL || comp > 0) {
@@ -91,6 +105,13 @@ struct song_node * find_artist(struct song_node * song, char * artist) {
     } else {
         return find_artist(temp -> next, artist);
     }
+}
+
+struct song_node * rand_point(struct song_node * song) {
+
+}
+
+struct song_node * remove_song(struct song_node * head, struct song_node * song){
 }
 
 // free the linked list of the given node
