@@ -119,7 +119,22 @@ struct song_node * rand_point(struct song_node * song) {
 	return temp;
 }
 
-struct song_node * remove_song(struct song_node * head, struct song_node * song){
+struct song_node * remove_song(struct song_node * head, struct song_node * song) {
+    if (compare(head, song) == 0) {
+        struct song_node * ret = head -> next;
+        free(head);
+        return ret;
+    }
+    struct song_node * prev;
+    struct song_node * temp = head;
+    while(compare(temp -> next, song) <= 0 && temp -> next != NULL) {
+        prev = temp;
+        temp = temp -> next;
+    } if (temp -> next == NULL) {
+        prev -> next = NULL;
+        free(temp);
+        return head;
+    } 
 }
 
 // free the linked list of the given node
