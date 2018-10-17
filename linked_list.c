@@ -76,7 +76,7 @@ struct song_node * insert_order(struct song_node * node, char * a, char * n) {
     // if (comp == 0) {
         // return temp -> artist;
     // } else if (temp -> next == NULL || comp > 0) {
-        // return NULL;
+        // return ULL;
     // } else {
         // return find_song(temp -> next, target);
     // }
@@ -108,7 +108,15 @@ struct song_node * find_artist(struct song_node * song, char * artist) {
 }
 
 struct song_node * rand_point(struct song_node * song) {
-
+	struct song_node * temp = song;
+	srand(time(NULL)); //not sure if this should be here or in main
+	while (rand() % 2){
+		if (temp -> next == NULL)
+			return temp;
+		else
+			temp = temp->next;
+	}
+	return temp;
 }
 
 struct song_node * remove_song(struct song_node * head, struct song_node * song){
