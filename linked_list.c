@@ -22,6 +22,10 @@ void print_list(struct song_node * node) {
     }
 }
 
+void print_node(struct song_node * node) {
+  printf("%s: %s", node -> artist, node -> name);
+}
+
 // creates and returns a pointer to a new song node
 struct song_node * create(char * artist, char * name) {
     struct song_node * temp;
