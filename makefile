@@ -11,7 +11,7 @@ linked_list.o:
 	gcc -c linked_list.c
 
 test.o:
-	gcc -c test.o
+	gcc -c test.c
 
 clean:
-	@rm -rf *.o a.out 
+	@rm -rf *.o a.out
