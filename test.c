@@ -167,11 +167,81 @@ int main() {
   printf("=================================================\n\n");
   
   printf("--- TESTING print_by_letter ---\n\n");
+  print_by_letter(lib, 'A');
+  print_by_letter(lib, 'T');
+  print_by_letter(lib, 'J');
+  print_by_letter(lib, '?');
+  
   printf("=================================================\n\n");
+  
+  printf("--- TESTING print_by_artist ---\n\n");
+  print_by_artist(lib, "Oliver Riot");
+  printf("\n\n");
+  print_by_artist(lib, "Drax Project");
+  printf("\n\n");
+  print_by_artist(lib, "Camilla Cheng");
+  
   printf("=================================================\n\n");
+  
+  printf("--- TESTING search_song ---\n\n");
+  find_s0 = search_song(lib, s3->name, s3->artist);
+  printf(" looking for [%s: %s]\n", s3->artist, s3->name);
+  if (find_s0 == NULL) 
+	printf("  song not found (O_O)\n");
+  else {
+    printf("  song found! ('U') ");
+    print_songs(find_s0);
+  }
+  find_s1 = search_song(lib, "Mr. K", "I Love My Students");
+  printf(" looking for [%s: %s]\n", "Mr. K", "I Love My Students");
+  if (find_s1 == NULL) 
+	printf("  song not found (O_O)\n");
+  else {
+    printf("  song found! ('U') ");
+    print_songs(find_s1);
+  }
   printf("=================================================\n\n");
+  
+  printf("--- TESTING search_artist ---\n\n");
+  find_a0 = search_artist(lib, s8->artist);
+  printf(" looking for [%s: %s]\n", s8->artist, s8->name);
+  if (find_a0 == NULL) 
+	printf("  artist not found (?_?)\n");
+  else {
+    printf("  song found! (0u<) ");
+    print_songs(find_a0);
+  }
+  find_a1 = search_song(lib, "Mr. K", "I'm Not Sarcastic");
+  printf(" looking for [%s: %s]\n", "Mr. K", "I Love My Students");
+  if (find_a1 == NULL) 
+	printf("  song not found (O_O)\n");
+  else {
+    printf("  song found! ('U') ");
+    print_songs(find_a1);
+  }
   printf("=================================================\n\n");
+  
+  printf("--- TESTING delete_song ---\n\n");
+  printf("Deleting\n ");
+  print_song(s2);
+  lib = delete_song(lib, s2);
+  print_lib(lib);
+  
+  printf("Deleting\n ");
+  print_song(s8);
+  lib = delete_song(lib, s8);
+  print_lib(lib);
+  
   printf("=================================================\n\n");
+  
+  printf("--- TESTING shuffle ---\n\n");
+  shuffle(lib);
+  
+  printf("=================================================\n\n");
+  printf("--- TESTING clear_library ---\n\n");
+  lib = clear_library(lib);
+  
+  
   printf("=================================================\n\n");
   
 }

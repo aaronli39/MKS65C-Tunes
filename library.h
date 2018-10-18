@@ -21,6 +21,6 @@ struct library* delete_song(struct library*, struct song_node *);
 
 void shuffle(struct library*);
 
-void clear_library(struct library*);
+struct library * clear_library(struct library*);
 
 #endif

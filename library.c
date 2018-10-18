@@ -44,14 +44,14 @@ struct library * add_song(struct library * lib, struct song_node * song) {
 
 void print_by_letter(struct library * lib, char temp) {
     if (temp >= 65 && temp <= 90) {
-        printf("%c list", temp);
+        printf("%c list - ", temp);
         temp -= 65;
     } else if (temp >= 97 && temp <= 122) {
         temp -= 32;
-        printf("%c list", temp);
+        printf("%c list - ", temp);
         temp -= 65;
     } else {
-        printf("%c list", temp);
+        printf("%c list - ", temp);
         temp = 26;
     }
     print_songs(lib -> letter[temp]);
@@ -81,7 +81,8 @@ struct song_node * search_artist(struct library * lib, char* artist) {
         if (strcmp(temp -> artist, artist) == 0) {
             return temp;
         } temp = temp -> next;
-    } return NULL;
+    } 
+	return NULL;
 }
 
 struct song_node * search_song(struct library * lib, char * name, char * artist) {
@@ -122,30 +123,44 @@ void shuffle(struct library * lib) {
 }
 
 struct library * delete_song(struct library * lib, struct song_node * song) {
-    int place = song -> artist[0];
     if (search_song(lib, song -> name, song -> artist) == NULL) {
         return lib;
-    } struct song_node * pre = pre_search(lib, song -> name, song -> artist);
+    } 
+	
+	struct song_node * pre = pre_search(lib, song -> name, song -> artist);
 
     if (pre != NULL) {
+		printf("1");
         struct song_node * rem = pre -> next;
         pre -> next = pre -> next -> next;
         free(rem);
+		rem = NULL;
         return lib;
-    } else {
+    } 
+	else {
+		printf("3");
+		int place = song -> artist[0];
         if (place >= 65 && place <= 90) {
             place -= 65;
-        } else {
+			printf("4");
+        } 
+		else { 
+			printf("5");
             place = 26;
-        } struct song_node * rem = lib -> letter[place];
+        } 
+		printf("6");
+		struct song_node * rem = lib -> letter[place];
         lib -> letter[place] = lib -> letter[place]  ->  next;
         free(rem);
-    } return lib;
+		rem = NULL;
+    }
+	return lib;
 }
 
-void clear_library(struct library * lib) {
+struct library * clear_library(struct library * lib) {
     int i;
     for (i = 0; i < 27; i++) {
         lib -> letter[i] = free_list(lib -> letter[i]);
     } free(lib);
+	return lib;
 }
