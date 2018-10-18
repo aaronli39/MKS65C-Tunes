@@ -6,9 +6,9 @@ int main() {
   printf("SICK MUSIC PLAYER by Aaron Li and Camilla Cheng\n\n");
   printf("LINKED LIST TESTING\n");
   printf("=================================================\n\n");
-  struct song_node start = create("the beatles", "hey jude");
+  struct song_node * start = create("the beatles", "hey jude");
   start = insert_front(start, "katy perry", "firework");
-  start = insert_order(start, "maroon 5", "she will be loved")
+  start = insert_order(start, "maroon 5", "she will be loved");
 
   printf("Testing print_list\n ");
   print_list(start);
@@ -19,7 +19,7 @@ int main() {
   printf("=================================================\n\n");
 
   printf("Testing find_song\n");
-  struct song_node find_s0 = find_song("maroon 5", "she will be loved");
+  struct song_node find_s0 = find_song(start, "maroon 5", "she will be loved");
   printf("looking for [maroon 5 : she will be loved]\n");
   if (find_s0 != NULL) {
     printf(" song found! ");
@@ -63,7 +63,7 @@ int main() {
   printf("=================================================\n\n");
 
   printf("Testing rand_point");
-  
+
   printf("=================================================\n\n");
   printf("=================================================\n\n");
   printf("=================================================\n\n");

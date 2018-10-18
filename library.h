@@ -1,7 +1,24 @@
-void print_lib(struct song_node * lib[27]);
-void add_song(struct song_node * node);
-struct song_node * search_given(char * inp);
-char * search_artist(struct_node * lib[27]);
-void shuffle(struct song_node * lib[27]);
-void delete_song(struct song_node * node);
-void clear(struct song_node * lib[27]);
+#ifndef PLAYER_H
+#define PLAYER_H
+
+struct library {struct song_node * letter[27];};
+
+void add_song(struct library *, struct song_node *);
+
+struct song_node * search_artist(struct library*, char*);
+
+struct song_node * search_song(struct library*, char*, char*);
+
+void print_by_artist(struct library*, char*);
+
+void print_library(struct library*);
+
+void print_by_letter(struct library*, char);
+
+struct library* delete_song(struct library*, struct song_node *);
+
+void shuffle(struct library*);
+
+void clear_library(struct library*);
+
+#endif
