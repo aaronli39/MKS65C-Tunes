@@ -1,5 +1,5 @@
-compile: test.o linked_list.o library.o
-	gcc test.o
+compile: library.o linked_list.o test.o
+	gcc test.o linked_list.o library.o
 
 run:
 	./a.out
@@ -14,4 +14,4 @@ test.o: test.c
 	gcc -c test.c
 
 clean:
-	@rm -rf *.o a.out
+	-rm -rf *.o a.out

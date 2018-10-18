@@ -6,16 +6,17 @@
 // helper methods
 int compare(struct song_node * s1, struct song_node * s2) {
     if (strcmp(s1  ->  artist, s2  ->  artist) == 0) {
-        return strcmp(s1  ->  artist, s2  ->  artist);
-    } return strcmp(s1  ->  artist, s2  ->  artist);
+        return strcmp(s1  ->  name, s2  ->  name);
+    } 
+	return strcmp(s1  ->  artist, s2  ->  artist);
 }
 
 struct song_node * find_prev(struct song_node * song, struct song_node * inp) {
     struct song_node * temp = song;
     struct song_node * prev;
-    int comp = compare(temp, inp);
+    int comp;
 
-    while (0 > comp && comp != 0 && temp -> next != NULL) {
+    while (0 > (compare(temp, inp)) && comp != 0 && temp -> next != NULL) {
         prev = temp;
         temp = temp -> next;
     }
@@ -50,6 +51,8 @@ void print_songs(struct song_node * song) {
             temp = temp -> next;
         }
     }
+	printf("\n");
+
 }
 
 struct song_node * insert_front(struct song_node * head, char* name, char* artist) {
@@ -61,17 +64,18 @@ struct song_node * insert_front(struct song_node * head, char* name, char* artis
 //goes through and inserts song
 struct song_node * insert_order(struct song_node * song, struct song_node * new) {
     struct song_node * temp = song;
-
     if (temp == NULL) {
         return new;
     }
 
-    if (0 < compare(temp, new)) {
+    if (compare(temp, new) >0) {
         new -> next = song;
         return new;
-    } while (0 > compare(temp -> next, new) && temp -> next != NULL) {
+    } 
+	while (temp -> next != NULL && compare(temp -> next, new) < 0) {
         temp = temp -> next;
-    } new -> next = temp -> next;
+    }
+	new -> next = temp -> next;
     temp -> next = new;
     return song;
 }
@@ -81,25 +85,32 @@ struct song_node * insert_order(struct song_node * song, struct song_node * new)
 struct song_node * find_node(struct song_node * song, struct song_node * inp) {
     if (song == NULL) {
         return NULL;
-    } struct song_node * temp = song;
+    } 
+	struct song_node * temp = song;
 
-    int comp = compare(temp, inp);
+    int comp;
 
-    while (0 > comp && comp != 0 && temp -> next != NULL) {
+    while (temp -> next != NULL && (comp = compare(temp, inp)) < 0 && comp!= 0) {
         temp = temp -> next;
-    } if (temp -> next == NULL || comp > 0) {
+    } 
+
+	if (temp -> next == NULL || comp > 0) {
         return NULL;
-    } return temp;
+    } 
+
+	return temp;
 }
 
 struct song_node * find_artist(struct song_node * song, char * artist) {
     struct song_node * temp = song;
-    int comp = strcmp(temp -> artist, artist);
-    while (0 > comp && comp != 0 && temp -> next != NULL) {
+    int comp;
+    while (temp -> next != NULL && 0 > (comp = strcmp(temp -> artist, artist)) && comp != 0 ) {
         temp = temp -> next;
-    } if (temp -> next == NULL || comp > 0) {
+    } 
+	if (temp -> next == NULL || comp > 0) {
         return NULL;
-    } return temp;
+    } 
+	return temp;
 }
 
 struct song_node * random_song(struct song_node * song) {
@@ -120,8 +131,10 @@ struct song_node * remove_song(struct song_node * song, struct song_node * inp) 
     if (compare(song, inp) == 0) {
         struct song_node * ret = song -> next;
         free(song);
+		song = NULL;
         return ret;
-    } struct song_node * prev = find_prev(song, inp);
+    } 
+	struct song_node * prev = find_prev(song, inp);
 
     if (prev == NULL) {
         return song;
@@ -130,6 +143,7 @@ struct song_node * remove_song(struct song_node * song, struct song_node * inp) 
     struct song_node * target= prev -> next;
     prev -> next = target -> next;
     free(target);
+	target = NULL;
     return song;
 }
 
@@ -137,9 +151,12 @@ struct song_node * free_list(struct song_node * song) {
     if (song == NULL) {
         return song;
     } if (song -> next == NULL) {
+		printf("freeing [%s: %s]\n", song->artist, song->name);
         free(song);
-    } else {
+    } else {;
         free_list(song -> next);
+		printf("freeing [%s: %s]\n", song->artist, song->name);
         free(song);
-    } return song;
+    } 
+	return song;
 }

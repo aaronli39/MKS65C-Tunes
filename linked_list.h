@@ -25,4 +25,8 @@ struct song_node * random_song(struct song_node * n);
 
 struct song_node * remove_song(struct song_node *, struct song_node *);
 
+//helper func
+
+int compare(struct song_node *, struct song_node *);
+
 #endif

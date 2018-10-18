@@ -5,7 +5,7 @@
 #include "linked_list.h"
 
 // helpers
-struct library * create() {
+struct library * create_lib() {
     struct library * lib = calloc(sizeof(struct song_node), 27);
     return lib;
 }
@@ -30,7 +30,7 @@ void print_lib(struct library * lib) {
     printf("=============END LIBRARY=============\n");
 }
 
-void add_song(struct library * lib, struct song_node * song) {
+struct library * add_song(struct library * lib, struct song_node * song) {
     int first = (song -> artist)[0];
     int place = first - 65;
 
@@ -39,6 +39,7 @@ void add_song(struct library * lib, struct song_node * song) {
     } else {
         lib -> letter[26] = insert_order((lib -> letter)[26], song);
     }
+	return lib;
 }
 
 void print_by_letter(struct library * lib, char temp) {
