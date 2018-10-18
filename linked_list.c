@@ -29,7 +29,7 @@ struct song_node * find_prev(struct song_node * song, struct song_node * inp) {
 }
 
 // methods
-struct song_node * create(char* artist, char* name) {
+struct song_node * make(char* artist, char* name) {
     struct song_node * temp;
     temp = malloc(sizeof(struct song_node));
     strcpy(temp  ->  artist, artist);
@@ -53,7 +53,7 @@ void print_songs(struct song_node * song) {
 }
 
 struct song_node * insert_front(struct song_node * head, char* name, char* artist) {
-    struct song_node * temp = create(name, artist);
+    struct song_node * temp = make(name, artist);
     temp -> next = head;
     return temp;
 }

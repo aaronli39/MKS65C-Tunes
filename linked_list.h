@@ -11,6 +11,8 @@ void print_songs(struct song_node *);
 
 void print_song(struct song_node *);
 
+struct song_node * make(char* artist, char* name);
+
 struct song_node * insert_front(struct song_node *, char*, char*);
 
 struct song_node * insert_order(struct song_node *, struct song_node *);
